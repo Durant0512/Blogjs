@@ -33,7 +33,7 @@ const managerApi = {
             method: 'DELETE',
             body: JSON.stringify(post),
         }
-       return fetch(url, request)
+       return fetch(request)
        .then((response)=>{
             return response.json();
        });
