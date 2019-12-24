@@ -25,19 +25,18 @@ const managerApi = {
        });
     },
 
-    /*deletePosts(post) {
+    deletePosts(postId) {
         const params = `api_key=${this.apiKey}`;
-        const url = `http://blog.api.axenov-it.com/v1/posts?${params}`;
+        const url = `http://blog.api.axenov-it.com/v1/posts/${postId}?${params}`;
 
         const request = {
             method: 'DELETE',
-            body: JSON.stringify(post),
         }
        return fetch(request)
        .then((response)=>{
-            return response.json();
+            return response;
        });
-    },*/
+    },
 
 }
 
@@ -69,26 +68,32 @@ const managerView = {
     },
 
     renderPosts(posts){
-        let html = '';
+       let html = `
+        <tr class="tableposts__row">
+            <th class="tableposts__cell">Title</th>
+            <th class="tableposts__cell">Status</th>
+            <th class="tableposts__cell">Description</th>
+            <th class="tableposts__cell">Full description</th>
+            <th class="tableposts__cell">Delete</th>
+        </tr>
+    `
 
             for(let post of posts){
                 html += `
-                    <tr>
-                        <td>${post.title}</td>
-                        <td>${post.status}</td>
-                        <td>${post.short_description}</td>
-                        <td>${post.full_description}</td>
+                    <tr class="tableposts__row">
+                        <td class="tableposts__cell">${post.title}</td>
+                        <td class="tableposts__cell">${post.status}</td>
+                        <td class="tableposts__cell">${post.short_description}</td>
+                        <td class="tableposts__cell">${post.full_description}</td>
+                        <td id="delbtn" class="tableposts__cell"><button>Delete</button></td>
                     </tr>
                 `
             }
 
             this.postList.innerHTML = html;
-
-           /* let del = document.createElement('button');
-            del.innerHTML = 'DELETE POST';
-            this.postList.appendChild(del);*/
-
+            
     },
+
 
 
 
@@ -97,10 +102,15 @@ const managerView = {
 
         managerApi.getPosts(50, 1)
         .then((data) => this.renderPosts(data.posts));
-    }
+    },
+
+
+   
 }
 
 managerView.init();
+
+
 
 
 /*managerApi.addPosts({

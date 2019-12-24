@@ -20,12 +20,17 @@
 }
 
 #posts-list {
-    max-width: 1500px;
+    max-width: 900px;
     width: 100%;
     text-align: start;
-    margin: 100px;
+    margin: 15px auto;
     justify-content: space-between;
     background: rgb(108, 173, 138);
     border:1px solid black;
     padding-left: 30px;
+}
+
+.tableposts__cell {
+    border: 1px solid;
+    padding: 5px;
 }
